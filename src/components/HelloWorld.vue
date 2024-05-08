@@ -9,12 +9,12 @@ const students = [
   { id: 2, name: 'Olamide', age: 95, paid: false },
   { id: 3, name: 'Victor', age: 45, paid: false },
   { id: 4, name: 'Olamide', age: 95, paid: false },
-  { id: 5, name: 'Abike', age: 65, paid: true }
+  { id: 5, name: 'Abike', age: 65, paid: true },
+  { id: 6, name: 'Sunday', age: 55, paid: true }
 ]
-const togglePaid = (index) => {
-  let student = students.find((student) => student.id !== index + 1)
-  // console.log((student.paid = !student.paid))
-  // console.log(student)
+const togglePaid = (id) => {
+  let student = students.find((student) => student.id === id)
+  if (student) student.paid = !student.paid
 }
 
 const paidStudents = computed(() => {
@@ -29,30 +29,27 @@ const paidStudents = computed(() => {
       <p class="text-gray-700">Age: {{ age }}</p>
       <div class="mt-4">
         <p class="font-semibold">All Students</p>
-        <div v-for="student in students" :key="student.id" class="mt-2">
+        <div v-for="(student, index) in students" :key="index" class="mt-2">
           <p>
             Name: {{ student.name }} - Age: {{ student.age }} - Paid:
             {{ student.paid ? 'Yes' : 'No' }}
           </p>
-          <p :id="student.paid ? 'paid' : 'NotPaid'" @click="togglePaid(index)">
+          <p :id="student.paid ? 'paid' : 'NotPaid'" @click="togglePaid(student.id)">
             {{ student.name }}
           </p>
         </div>
       </div>
       <button
-        v-on:click="age++"
+        @click="age++"
         class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
       >
         Increase my Age
       </button>
-      <div v-if="day == 'Tuesday'">Today is Tuesday</div>
-      <div v-else-if="day == 'Wednesday'">Today is Wednesday</div>
-
+      <div v-if="day === 'Tuesday'">Today is Tuesday</div>
+      <div v-else-if="day === 'Wednesday'">Today is Wednesday</div>
       <div v-else>Today is Not Tuesday</div>
-
-      <div v-show="check">Today is Wednesday</div>
-
-      <div v-for="student in paidStudents" :key="student.id">
+      <div v-show="day === 'Wednesday'">Today is Wednesday</div>
+      <div v-for="(student, index) in paidStudents" :key="index">
         <p>{{ student.name }}</p>
       </div>
     </div>
@@ -61,7 +58,8 @@ const paidStudents = computed(() => {
 
 <style scoped>
 #paid {
-  color: green;
+  color: white;
+  background-color: green;
 }
 #NotPaid {
   color: red;
