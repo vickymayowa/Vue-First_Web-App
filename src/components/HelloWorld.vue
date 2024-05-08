@@ -1,44 +1,69 @@
 <script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
+import { computed, ref } from 'vue'
+var myName = 'Vickydev'
+var age = ref(0)
+var day = ref('Tuesday')
+var check = ref(false)
+const students = [
+  { id: 1, name: 'John', age: 25, paid: true },
+  { id: 2, name: 'Olamide', age: 95, paid: false },
+  { id: 3, name: 'Victor', age: 45, paid: false },
+  { id: 4, name: 'Olamide', age: 95, paid: false },
+  { id: 5, name: 'Abike', age: 65, paid: true }
+]
+const togglePaid = (index) => {
+  let student = students.find((student) => student.id !== index + 1)
+  // console.log((student.paid = !student.paid))
+  // console.log(student)
+}
+
+const paidStudents = computed(() => {
+  return students.filter((student) => student.paid)
 })
 </script>
 
 <template>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
+  <div class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow-md">
+      <h4 class="text-xl font-semibold">Hello World, Dear {{ myName }}, Welcome to Vue</h4>
+      <p class="text-gray-700">Age: {{ age }}</p>
+      <div class="mt-4">
+        <p class="font-semibold">All Students</p>
+        <div v-for="student in students" :key="student.id" class="mt-2">
+          <p>
+            Name: {{ student.name }} - Age: {{ student.age }} - Paid:
+            {{ student.paid ? 'Yes' : 'No' }}
+          </p>
+          <p :id="student.paid ? 'paid' : 'NotPaid'" @click="togglePaid(index)">
+            {{ student.name }}
+          </p>
+        </div>
+      </div>
+      <button
+        v-on:click="age++"
+        class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+      >
+        Increase my Age
+      </button>
+      <div v-if="day == 'Tuesday'">Today is Tuesday</div>
+      <div v-else-if="day == 'Wednesday'">Today is Wednesday</div>
+
+      <div v-else>Today is Not Tuesday</div>
+
+      <div v-show="check">Today is Wednesday</div>
+
+      <div v-for="student in paidStudents" :key="student.id">
+        <p>{{ student.name }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+#paid {
+  color: green;
 }
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+#NotPaid {
+  color: red;
 }
 </style>
