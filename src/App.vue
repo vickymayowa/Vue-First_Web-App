@@ -4,7 +4,7 @@ import Fridge from './components/Fridge.vue'
 </script>
 
 <template>
-  <!-- <HelloWorld /> -->
+  <HelloWorld />
   <Fridge />
 </template>
 
