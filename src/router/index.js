@@ -1,0 +1,52 @@
+import { createWebHistory, createRouter } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/About/AboutView.vue'
+import LoginView from '../views/LoginView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
+import AboutUs from '../views/About/AboutUs.vue'
+import Companyinfo from '../views/About/Companyinfo.vue'
+import UserView from '../views/UserView.vue'
+
+const routes = [
+  {
+    path: '/',
+    component: HomeView
+  },
+  {
+    path: '/about',
+    component: AboutView,
+    name: 'about',
+    children: [
+      {
+        path: 'about-us',
+        name: 'uss',
+        component: AboutUs
+      },
+      {
+        path: 'our-company',
+        name: 'company',
+        component: Companyinfo
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: LoginView
+  },
+  {
+    path: '/user/:id',
+    name: 'user',
+    component: UserView
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFoundView
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+export default router

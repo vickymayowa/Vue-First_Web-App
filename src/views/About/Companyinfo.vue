@@ -1,0 +1,1 @@
+<template>company info</template>
