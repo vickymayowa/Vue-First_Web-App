@@ -6,6 +6,8 @@ import NotFoundView from '../views/NotFoundView.vue'
 import AboutUs from '../views/About/AboutUs.vue'
 import Companyinfo from '../views/About/Companyinfo.vue'
 import UserView from '../views/UserView.vue'
+import TodoView from '../views/TodoView.vue'
+import RecipeView from '../views/Recipe.vue'
 
 const routes = [
   {
@@ -41,6 +43,14 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     component: NotFoundView
+  },
+  {
+    path: '/todo',
+    component: TodoView
+  },
+  {
+    path: '/recipe',
+    component: RecipeView
   }
 ]
 
