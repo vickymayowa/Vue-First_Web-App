@@ -1,0 +1,40 @@
+for modal
+<script setup>
+  defineProps(['rescipeDetails'])
+</script>
+
+<template>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          {{ rescipeDetails.name }} <b> Instructions </b>
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 14px" v-for="(item, i) in rescipeDetials.instructions" :key="i">
+          <b>{{ i + 1 }}</b> {{ item }}
+        </p>
+        <div class="container">
+          <div class="fw-bold fs-5 mb-3">Ingredients</div>
+          <div class="get-grid">
+            <p
+              style="font-size: 13px"
+              class="col-12 py-2 text-center rounded-3 alert alert-primary"
+              v-for="(ingredients, i) in rescipeDetails.ingredients"
+              :key="i"
+            >
+              {{ ingredients }}
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</template>

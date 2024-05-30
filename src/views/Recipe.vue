@@ -5,19 +5,19 @@
       <div class="ml-3 flex space-x-4">
         <input
           type="text"
-          v-model="searchRecipe"
+          v-model="searchRecipeLocal"
           placeholder="Search recipes"
           class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-6">
-      <div
-        v-for="recipe in store.filteredRecipes"
-        :key="recipe.id"
-        class="bg-white rounded-lg shadow-md"
-      >
+    <div v-if="filteredRecipes.length === 0" class="text-center mt-6 font-bold text-3xl mb-5">
+      No recipes found matching your search.
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" v-else>
+      <div v-for="recipe in filteredRecipes" :key="recipe.id" class="bg-white rounded-lg shadow-md">
         <RecipeCard :recipedetails="recipe" />
       </div>
     </div>
@@ -25,16 +25,16 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRecipeStore } from '@/store/recipeStore'
 import RecipeCard from '../components/RecipeCard.vue'
 import { storeToRefs } from 'pinia'
 
 const store = useRecipeStore()
-const { recipes, searchRecipe } = storeToRefs(store)
-// console.log(recipes)
-
-onMounted(() => {
-  store.fetchRecipes()
+const { searchRecipe, filteredRecipes } = storeToRefs(store)
+const searchRecipeLocal = ref(searchRecipe.value)
+watch(searchRecipeLocal, (newVal) => {
+  store.setSearchRecipe(newVal)
 })
+store.fetchRecipes()
 </script>
