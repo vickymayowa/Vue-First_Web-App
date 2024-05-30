@@ -1,9 +1,15 @@
 <template>
-  <div class="p-4">
+  <div class="p-4 relative">
     <img :src="recipedetails.image" class="shadow shadow-4 rounded rounded-2" alt="Recipe-Image" />
     <div class="">
       <h2 class="text mt-4 ms-3 font-bold">{{ recipedetails.name }}</h2>
+      <div class="absolute bottom-9 ms-4 right-8">
+        <div class="bg-gray-800 text-white text-lg rounded-3 px-4 py-2">
+          {{ recipedetails.rating }}
+        </div>
+      </div>
     </div>
+
     <span
       class="items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 ms-3 mt-2"
       >{{ recipedetails.prepTimeMinutes }} - Mins</span
