@@ -18,6 +18,9 @@ const user = {
         <RouterLink to="/about" class="text-white hover:text-gray-400">About</RouterLink>
         <RouterLink to="/login" class="text-white hover:text-gray-400">Login</RouterLink>
         <RouterLink to="/todo" class="text-white hover:text-gray-400">Todo List View</RouterLink>
+        <RouterLink to="/products" class="text-white hover:text-gray-400"
+          >Products List View</RouterLink
+        >
         <RouterLink to="/recipe" class="text-white hover:text-gray-400">View Recipe </RouterLink>
         <RouterLink :to="`/user/${user.name}`" class="text-white hover:text-gray-400"
           >User</RouterLink

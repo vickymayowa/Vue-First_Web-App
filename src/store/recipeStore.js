@@ -14,7 +14,7 @@ export const useRecipeStore = defineStore('recipeStore', {
     async fetchRecipes() {
       this.isLoading = true
       try {
-        const response = await axios.get(`${RECIPE_API_URL}`)
+        const response = await axios.get(`${RECIPE_API_URL}?limit=10`)
         this.recipes = response.data.recipes
       } catch (error) {
         console.error('Error fetching recipes:', error)

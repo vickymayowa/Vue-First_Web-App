@@ -5,8 +5,9 @@ import LoginView from '../views/LoginView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import AboutUs from '../views/About/AboutUs.vue'
 import Companyinfo from '../views/About/Companyinfo.vue'
-import UserView from '../views/UserView.vue'
+import ProductView from '../views/ProductView.vue'
 import TodoView from '../views/TodoView.vue'
+import UserView from '../views/UserView.vue'
 import RecipeView from '../views/Recipe.vue'
 
 const routes = [
@@ -51,6 +52,10 @@ const routes = [
   {
     path: '/recipe',
     component: RecipeView
+  },
+  {
+    path: '/products',
+    component: ProductView
   }
 ]
 
