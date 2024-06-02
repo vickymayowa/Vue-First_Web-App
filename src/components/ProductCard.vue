@@ -29,7 +29,7 @@
       <button
         class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
       >
-        Add to Cart
+        View Product
       </button>
     </div>
   </div>
@@ -42,6 +42,18 @@ export default {
     product: {
       type: Object,
       required: true
+    }
+  },
+  created() {
+    fetch('https://dummyjson.com/products')
+      .then((res) => res.json())
+      .then((data) => {
+        this.products = data.products
+      })
+  },
+  methods: {
+    viewProduct(id) {
+      this.$router.push({ name: 'ProductDetails', params: { id } })
     }
   }
 }

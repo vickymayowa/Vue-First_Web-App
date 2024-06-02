@@ -1,22 +1,20 @@
 <script setup>
+import { useProductStore } from '../store/productStore'
 import ProductCard from '../components/ProductCard.vue'
-import { ref, onMounted, computed } from 'vue'
-import Loader from '../components/Loader.vue'
-import { useProductStore } from '@/store/productStore'
-import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 
+// Accessing the product store instance
 const productStore = useProductStore()
-const { products, isLoading } = storeToRefs(productStore)
-const searchProductLocal = ref('')
 
-const searchProducts = () => {
-  productStore.fetchProducts(searchProductLocal.value)
+const router = useRouter()
+const viewProduct = (id) => {
+  router.push({ name: 'ProductPage', params: { id } })
 }
 
-// Fetch initial products when component mounts
-onMounted(() => {
-  productStore.fetchProducts()
-})
+// Method to search for products (implementation needed)
+const searchProducts = (event) => {
+  const searchString = event.target.value
+}
 </script>
 
 <template>
@@ -24,19 +22,26 @@ onMounted(() => {
   <div class="flex justify-center mt-4">
     <input
       type="text"
-      v-model="searchProductLocal"
-      placeholder="Enter your Products Name"
+      placeholder="Enter your Product's Name"
       class="form-control px-4 py-2 border rounded-md"
       @input="searchProducts"
     />
   </div>
-  <div v-if="isLoading" class="text-center mt-4">Loading...</div>
-  <div v-else class="flex flex-wrap justify-center mt-4">
-    <ProductCard v-for="product in products" :key="product.id" :product="product" />
+  <div v-if="productStore.isLoading" class="text-center mt-5 justify-center text-3xl">
+    Loading Products ......
+  </div>
+  <div v-else class="flex flex-wrap justify-center mt-4 gap-3">
+    <ProductCard
+      v-for="product in productStore.products"
+      :key="product.id"
+      :product="product"
+      @view-product="viewProduct"
+    />
   </div>
 </template>
 
 <style scoped>
+/* Scoped styles for the input field */
 .form-control {
   width: 100%;
   max-width: 600px;

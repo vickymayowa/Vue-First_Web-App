@@ -8,6 +8,7 @@ import Companyinfo from '../views/About/Companyinfo.vue'
 import ProductView from '../views/ProductView.vue'
 import TodoView from '../views/TodoView.vue'
 import UserView from '../views/UserView.vue'
+import ProductPage from '../views/ProductsPage.vue'
 import RecipeView from '../views/Recipe.vue'
 
 const routes = [
@@ -56,6 +57,12 @@ const routes = [
   {
     path: '/products',
     component: ProductView
+  },
+  {
+    path: '/product/:id',
+    name: 'ProductPage',
+    component: ProductPage,
+    props: true
   }
 ]
 
