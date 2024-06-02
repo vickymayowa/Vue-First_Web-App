@@ -1,6 +1,7 @@
 <script setup>
 import ProductCard from '../components/ProductCard.vue'
 import { ref, onMounted, computed } from 'vue'
+import Loader from '../components/Loader.vue'
 import { useProductStore } from '@/store/productStore'
 import { storeToRefs } from 'pinia'
 
