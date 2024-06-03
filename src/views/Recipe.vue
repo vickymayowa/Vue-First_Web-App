@@ -11,6 +11,12 @@
         />
       </div>
     </div>
+    <div class="flex justify-start p-4 bg-blue-100 border border-blue-300 rounded-lg">
+      <span class="text-2xl font-bold">
+        Favourites - 
+        {{ count }}
+      </span>
+    </div>
 
     <div v-if="filteredRecipes.length === 0" class="text-center mt-6 font-bold text-3xl mb-5">
       No recipes found matching your search.
@@ -18,7 +24,7 @@
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" v-else>
       <div v-for="recipe in filteredRecipes" :key="recipe.id" class="bg-white rounded-lg shadow-md">
-        <RecipeCard :recipedetails="recipe" />
+        <RecipeCard :recipedetails="recipe" @update-favourites="updateMe" />
       </div>
     </div>
   </div>
@@ -31,10 +37,21 @@ import RecipeCard from '../components/RecipeCard.vue'
 import { storeToRefs } from 'pinia'
 
 const store = useRecipeStore()
+const count = ref(0)
+
 const { searchRecipe, filteredRecipes } = storeToRefs(store)
 const searchRecipeLocal = ref(searchRecipe.value)
 watch(searchRecipeLocal, (newVal) => {
   store.setSearchRecipe(newVal)
 })
 store.fetchRecipes()
+const updateMe = (me) => {
+  console.log(me)
+  console.log('from child')
+  if (!me) {
+    count.value++
+  } else {
+    count.value--
+  }
+}
 </script>
