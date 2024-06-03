@@ -50,6 +50,8 @@ const toggleFave = () => {
       >
         {{ recipedetails.prepTimeMinutes }} - Mins
       </span>
+
+      
       <button
         type="button"
         class="btn btn-primary mt-2 ms-5 mb-3 bg-green-500 text-gray-100 py-2 px-4 rounded-lg hover:bg-green-600 shadow-lg text-white"
