@@ -30,7 +30,7 @@ const toggleFave = () => {
     <div v-else>
       <img :src="recipedetails.image" class="shadow rounded" alt="Recipe-Image" />
       <div>
-        <div class="flex items-center justify-between mt-4 ms-3">
+        <div class="flex   items-center justify-between mt-4 ms-3">
           <h2 class="text font-bold">{{ recipedetails.name }}</h2>
           <i
             :class="`${added ? 'fa-solid' : 'fa-regular'} fa-heart text-danger`"

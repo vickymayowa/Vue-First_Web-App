@@ -10,9 +10,6 @@ export const useRecipeStore = defineStore('recipeStore', {
     isLoading: false,
     searchRecipe: ''
   }),
-
-
-  
   actions: {
     async fetchRecipes() {
       this.isLoading = true
