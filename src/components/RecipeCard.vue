@@ -73,6 +73,9 @@ const toggleFave = () => {
             @click="showModal = false"
             aria-label="Close modal"
           >
+
+
+          
             &times;
           </button>
           <RecipeModal :recipedetails="recipedetails" />
